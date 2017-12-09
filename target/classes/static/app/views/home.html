@@ -1,0 +1,30 @@
+<div class="alert alert-info">
+    last update at: <span>{{lastUpdate}}</span>
+</div>
+
+<form>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            <input type="text" class="form-control" placeholder="Search some coin by name" ng-model="searchFish">
+        </div>
+    </div>
+</form>
+
+<!--<crypto-tabs></crypto-tabs>-->
+<md-content>
+    <md-tabs md-dynamic-height="" md-border-bottom="">
+
+        <md-tab label="Volume changes">
+            <md-content class="md-padding">
+                <volumes></volumes>
+            </md-content>
+        </md-tab>
+        <md-tab label="Price changes">
+            <md-content class="md-padding">
+                <prices></prices>
+
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</md-content>

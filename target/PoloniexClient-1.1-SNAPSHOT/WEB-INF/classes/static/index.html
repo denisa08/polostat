@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>m6 v0.5</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.5/angular-material.min.css">
+    <link rel="stylesheet" href="app/style.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.5/angular-resource.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+
+
+
+    <script data-require="angular-animate.js@1.6.x" src="https://code.angularjs.org/1.6.5/angular-animate.js"
+            data-semver="1.6.5"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+    <script src="app/app.js"></script>
+    <script src="app/tabs.js"></script>
+    <script src="app/route.js"></script>
+
+
+
+    <!-- Including services -->
+    <script type="text/javascript" src="app/services/auth-service.js"></script>
+
+    <!-- Including controllers -->
+    <script type="text/javascript" src="app/controllers/nav.js"></script>
+    <script type="text/javascript" src="app/controllers/login.js"></script>
+    <script type="text/javascript" src="app/controllers/users.js"></script>
+    <script type="text/javascript" src="app/controllers/home.js"></script>
+    <script type="text/javascript" src="app/controllers/page-not-found.js"></script>
+    <script type="text/javascript" src="app/controllers/access-denied.js"></script>
+    <script type="text/javascript" src="app/controllers/register.js"></script>
+
+
+</head>
+
+
+<body ng-app="M6" ng-controller="mainController" ng-cloak>
+
+<div class="container">
+    <div ui-view="nav"></div>
+    <!-- Main view for showing all views -->
+    <div ui-view="content"></div>
+
+</div>
+
+
+<div class="alert alert-info">
+    <a href="https://t.me/lowe08">Developed by https://t.me/lowe08</a>
+</div>
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,212 @@
+<div class="container">
+    View <select ng-model="prop.value" ng-options="v for v in prop.values" ng-change="setItemsPerPage(prop.value)"
+                 style="margin-bottom:10px;">
+</select> records at a time.
+    <div class="topright">
+        <md-button class="md-raised md-primary"
+                   ng-click="sortType =  ['oneChanged','twoChanged','threeChanged','fourChanged','fiveChanged','tenChanged','thirtyChanged','hourChanged'] ; sortReverse=!sortReverse">
+            sort by best price
+        </md-button>
+
+    </div>
+</div>
+
+<table class="table   table-bordered table-striped">
+
+    <thead>
+    <tr>
+
+        <td>
+            <a href="#" ng-click="sortType = 'star'; sortReverse=!sortReverse">
+                <i class="fa fa-star"></i>
+
+                <span ng-show="sortType == 'star' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'star' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+        <td>
+            <a href="#" ng-click="sortType = 'userName'; sortReverse=!sortReverse">
+                Name
+                <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+        <td>
+            <a href="#" ng-click="sortType = 'last'; sortReverse=!sortReverse">
+                Last
+                <span ng-show="sortType == 'last' && sortReverse" class="fa fa-caret-up"></span>
+                <span ng-show="sortType == 'last' && !sortReverse" class="fa fa-caret-down"></span>
+            </a>
+        </td>
+        <td>
+            <a href="#" ng-click="sortType = 'oneChanged'; sortReverse=!sortReverse">
+                1m
+                <span ng-show="sortType == 'oneChanged' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'oneChanged' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+        <td>
+            <a href="#" ng-click="sortType = 'twoChanged'; sortReverse=!sortReverse">
+                2m
+                <span ng-show="sortType == 'twoChanged' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'twoChanged' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+        <td>
+            <a href="#" ng-click="sortType = 'threeChanged'; sortReverse=!sortReverse">
+                3m
+                <span ng-show="sortType == 'threeChanged' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'threeChanged' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+        <td>
+            <a href="#" ng-click="sortType = 'fourChanged'; sortReverse=!sortReverse">
+                4m
+                <span ng-show="sortType == 'fourChanged' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'fourChanged' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+
+        <td>
+            <a href="#" ng-click="sortType = 'fiveChanged'; sortReverse=!sortReverse">
+                5m
+                <span ng-show="sortType == 'fiveChanged' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'fiveChanged' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+        <td>
+            <a href="#" ng-click="sortType = 'tenChanged'; sortReverse=!sortReverse">
+                10m
+                <span ng-show="sortType == 'tenChanged' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'tenChanged' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+        <td>
+            <a href="#" ng-click="sortType = 'thirtyChanged'; sortReverse=!sortReverse">
+                30m
+                <span ng-show="sortType == 'thirtyChanged' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'thirtyChanged' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+        <td>
+            <a href="#" ng-click="sortType = 'hourChanged'; sortReverse=!sortReverse">
+                1hour
+                <span ng-show="sortType == 'hourChanged' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'hourChanged' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+        <td>
+            <a href="#" ng-click="sortType = 'threeHourChanged'; sortReverse=!sortReverse">
+                3hours
+                <span ng-show="sortType == 'threeHourChanged' && sortReverse" class="fa fa-caret-up"></span>
+                <span ng-show="sortType == 'threeHourChanged' && !sortReverse" class="fa fa-caret-down"></span>
+            </a>
+        </td>
+        <td>
+            <a href="#" ng-click="sortType = 'sixHourChanged'; sortReverse=!sortReverse">
+                6hours
+                <span ng-show="sortType == 'sixHourChanged' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'sixHourChanged' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+        <td>
+            <a href="#" ng-click="sortType = 'twentyHourChanged'; sortReverse=!sortReverse">
+                12hours
+                <span ng-show="sortType == 'twentyHourChanged' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'twentyHourChanged' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+        <td>
+            <a href="#" ng-click="sortType = 'allTimeChanged'; sortReverse=!sortReverse">
+                all
+                <span ng-show="sortType == 'allTimeChanged' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'allTimeChanged' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+    </tr>
+    </thead>
+
+    <tbody>
+    <!--  <tr ng-animate=" 'animate' " ng-repeat="pair in pairs | orderBy['-oneChanged','-fiveChanged','-tenChanged','-thirtyChanged','-hourChanged'] | filter:searchFish | limitTo:itemsPerPage:itemsPerPage*(page-1)">-->
+    <tr ng-animate=" 'animate' "
+        ng-repeat="pair in pairs | orderBy:sortType:sortReverse | filter:searchFish | limitTo:itemsPerPage:itemsPerPage*(page-1)">
+
+        <td>
+
+            <div class="content">
+                <a href="#" ng-click="doVote(pair)">
+                    <i ng-class="(pair.star==true) ? 'fa fa-star' : 'fa fa-star-o'"></i>
+                </a>
+            </div>
+
+
+        </td>
+
+        <td><a target="_blank" href="https://bittrex.com/Market/Index?MarketName={{ pair.name }}">{{ pair.name }}</a>
+        </td>
+        <td>{{ pair.last }}</td>
+        <!--    <td d3Visualization   ng-class="{red: (pair.oneChanged <0), green: (pair.oneChanged >=0)}">{{ pair.oneChanged }}</td>-->
+        <td animate-on-change='pair.oneChanged' ng-class="{red: (pair.oneChanged <0), green: (pair.oneChanged >=0)}"><i
+                ng-class="{down: (pair.oneChanged <0), up: (pair.oneChanged >=0)}"></i>{{ pair.oneChanged }}%
+        </td>
+        <td animate-on-change='pair.twoChanged' ng-class="{red: (pair.twoChanged <0), green: (pair.twoChanged >=0)}"><i
+                ng-class="{down: (pair.twoChanged <0), up: (pair.twoChanged >=0)}"></i>{{ pair.twoChanged }}%
+        </td>
+        <td animate-on-change='pair.threeChanged' ng-class="{red: (pair.threeChanged <0), green: (pair.threeChanged >=0)}"><i
+                ng-class="{down: (pair.threeChanged <0), up: (pair.threeChanged >=0)}"></i>{{ pair.threeChanged }}%
+        </td>
+        <td animate-on-change='pair.fourChanged' ng-class="{red: (pair.fourChanged <0), green: (pair.fourChanged >=0)}"><i
+                ng-class="{down: (pair.fourChanged <0), up: (pair.fourChanged >=0)}"></i>{{ pair.fourChanged }}%
+        </td>
+        <td animate-on-change='pair.fiveChanged' ng-class="{red: (pair.fiveChanged <0), green: (pair.fiveChanged >=0)}">
+            <i ng-class="{down: (pair.fiveChanged <0), up: (pair.fiveChanged >=0)}"></i>{{ pair.fiveChanged }}%
+        </td>
+        <td animate-on-change='pair.tenChanged' ng-class="{red: (pair.tenChanged <0), green: (pair.tenChanged >=0)}"><i
+                ng-class="{down: (pair.tenChanged <0), up: (pair.tenChanged >=0)}"></i>{{ pair.tenChanged }}%
+        </td>
+        <td animate-on-change='pair.thirtyChanged'
+            ng-class="{red: (pair.thirtyChanged <0), green: (pair.thirtyChanged >=0)}"><i
+                ng-class="{down: (pair.thirtyChanged <0), up: (pair.thirtyChanged >=0)}"></i>{{ pair.thirtyChanged }}%
+        </td>
+        <td animate-on-change='pair.hourChanged' ng-class="{red: (pair.hourChanged <0), green: (pair.hourChanged >=0)}">
+            <i ng-class="{down: (pair.hourChanged <0), up: (pair.hourChanged >=0)}"></i>{{ pair.hourChanged }}%
+        </td>
+        <td animate-on-change='pair.threeHourChanged'
+            ng-class="{red: (pair.threeHourChanged <0), green: (pair.threeHourChanged >=0)}"><i
+                ng-class="{down: (pair.threeHourChanged <0), up: (pair.threeHourChanged >=0)}"></i>{{
+            pair.threeHourChanged }}%
+        </td>
+        <td animate-on-change='pair.sixHourChanged'
+            ng-class="{red: (pair.sixHourChanged <0), green: (pair.sixHourChanged >=0)}"><i
+                ng-class="{down: (pair.sixHourChanged <0), up: (pair.sixHourChanged >=0)}"></i>{{ pair.sixHourChanged
+            }}%
+        </td>
+        <td animate-on-change='pair.twentyHourChanged'
+            ng-class="{red: (pair.twentyHourChanged <0), green: (pair.twentyHourChanged >=0)}"><i
+                ng-class="{down: (pair.twentyHourChanged <0), up: (pair.twentyHourChanged >=0)}"></i>{{
+            pair.twentyHourChanged }}%
+        </td>
+        <td animate-on-change='pair.allTimeChanged'
+            ng-class="{red: (pair.allTimeChanged <0), green: (pair.allTimeChanged >=0)}"><i
+                ng-class="{down: (pair.allTimeChanged <0), up: (pair.allTimeChanged >=0)}"></i>{{ pair.allTimeChanged
+            }}%
+        </td>
+    </tr>
+    </tbody>
+</table>
+View <select ng-model="prop.value" ng-options="v for v in prop.values" ng-change="setItemsPerPage(prop.value)"
+             style="margin-bottom:10px;">
+</select> records at a time.
+
+<uib-pagination class="pagination" total-items="pairs.length" ng-model="page"
+                ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;"
+                items-per-page=itemsPerPage></uib-pagination>

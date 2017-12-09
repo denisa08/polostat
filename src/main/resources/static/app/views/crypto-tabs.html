@@ -1,0 +1,16 @@
+<section>
+  <!--  Tab Navigation  -->
+  <ul class="nav nav-pills">
+    <li ng-class="{ active:tab.isSet(1) }">
+      <a href="" ng-click="tab.setTab(1)">Price changes</a>
+    </li>
+    <li ng-class="{ active:tab.isSet(2) }">
+      <a href="" ng-click="tab.setTab(2)">Voume changes</a>
+    </li>
+  </ul>
+  <!--  Description Tab's Content  -->
+  <prices ng-show="tab.isSet(1)"></prices>
+  <!--  Spec Tab's Content  -->
+  <volumes ng-show="tab.isSet(2)"></volumes>
+  <!--  Review Tab's Content  -->
+ </section>
