@@ -45,23 +45,14 @@ public class ScheduledTask {
 
 
     // @Scheduled(fixedRate = 300000)
-    @Scheduled(fixedRate = 20000)
+    @Scheduled(fixedRate = 50000)
     public synchronized void go() throws Exception {
         log.info("The time is now {}", dateFormat.format(new Date()));
         bittrexRunner.getLastMarket();
  }
 
 
-    private Properties loadProperties(String propertiesFileName) {
-        Properties properties = new Properties();
-        try (InputStream in = this.getClass().getClassLoader().getResourceAsStream(propertiesFileName)) {
-            properties.load(in);
-        } catch (IOException ex) {
-            LOG.error("Could not load properties file " + propertiesFileName + " - " + ex.getMessage());
-        }
 
-        return properties;
-    }
 
 
 }

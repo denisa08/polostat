@@ -41,9 +41,34 @@ public class HomeRestController {
 
         List<String> roles = new ArrayList<>();
         roles.add("USER");
+        roles.add("ADMIN");
+
         appUser.setRoles(roles);
         return new ResponseEntity<AppUser>(appUserRepository.save(appUser), HttpStatus.CREATED);
     }
+
+
+
+
+    /**
+     * This method is used for user registration. Note: user registration is not
+     * require any authentication.
+     *
+     * @param appUser
+     * @return
+     */
+    @RequestMapping(value = "/pay", method = RequestMethod.POST)
+    public ResponseEntity<AppUser> pay(@RequestBody AppUser appUser) {
+   /*     AppUser user = appUserRepository.loadUserByUsername(appUser.getUsername());
+        if (user == null) {
+            throw new RuntimeException("Username doesnt exist");
+        }
+        user.getRoles().add("DENIS");*/
+
+        return null;
+    }
+
+
 
     /**
      * This method will return the logged user.
@@ -73,9 +98,7 @@ public class HomeRestController {
 
         Map<String, Object> tokenMap = new HashMap<String, Object>();
         if (appUser != null && appUser.getPassword().equals(params.getPassword())) {
-            List<String> roles = new ArrayList<>();
-            roles.add("USER");
-            appUser.setRoles(roles);
+
 
 
             token = Jwts.builder().setSubject(params.getUsername()).claim("roles", appUser.getRoles()).setIssuedAt(new Date())

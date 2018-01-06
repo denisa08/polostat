@@ -7,8 +7,13 @@ import ru.denisa.model.Pair;
  */
 public interface ITelegramObserver {
 
-    public void handle1minChange(Pair pair);
-    public void handle5minChange(Pair pair);
+
+      void handle5minChangePrice();
+      void handle5minChangeVolume();
 
 
+
+    void handleVolumeChange(Pair pair);
+
+    void handlePriceChange(Pair pair);
 }

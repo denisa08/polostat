@@ -31,7 +31,7 @@
                              </tr>
                             <tr>
                                 <td class="option">Telegramm BOT</td>
-                                <td>-</td>
+                                <td><i class="fa fa-check"></i></td>
                                 <td><i class="fa fa-check"></i></td>
                                 <td><i class="fa fa-check"></i></td>
                             </tr>
@@ -59,9 +59,33 @@
                             <tfoot class="thead-inverse">
                             <tr>
                                 <th class="w-25"></th>
-                                <th class=""><button class="btn btn-primary">Buy Now</button></th>
-                                <th class=""><button class="btn btn-primary">Buy Now</button></th>
-                                <th class=""><button class="btn btn-primary">Buy Now</button></th>
+                                <th class="">
+
+                                    <form action="https://www.coinpayments.net/index.php" method="post">
+                                        <input type="hidden" name="cmd" value="_pay">
+                                        <input type="hidden" name="reset" value="1">
+                                        <input type="hidden" name="merchant" value="56039cca5d5fd50781e741acc3121b7b">
+                                        <input type="hidden" name="item_name" value="Basic subscription">
+                                        <input type="hidden" name="currency" value="USD">
+                                        <input type="hidden" name="amountf" value="49.00000000">
+                                        <input type="hidden" name="quantity" value="1">
+                                        <input type="hidden" name="allow_quantity" value="0">
+                                        <input type="hidden" name="want_shipping" value="0">
+                                        <input type="hidden" name="success_url" value="http://194.87.96.39:8080/btx/pay?user={{user.name}}">
+                                        <input type="hidden" name="allow_extra" value="0">
+                                        <button class="btn btn-primary" type="submit">Buy Now with CoinPayments.net</button>
+<!--
+                                        <input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" value="Done"/>
+-->
+
+<!--
+                                        <input type="image" src="https://www.coinpayments.net/images/pub/buynow-wide-yellow.png" alt="Buy Now with CoinPayments.net">
+-->
+                                    </form>
+
+                                </th>
+                                <th class=""><button class="btn btn-primary" disabled>Currenty not available</button></th>
+                                <th class=""><button class="btn btn-primary" disabled>Currenty not available</button></th>
                             </tr>
                             </tfoot>
                         </table>

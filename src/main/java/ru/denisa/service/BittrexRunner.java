@@ -98,7 +98,26 @@ public class BittrexRunner implements ISubject {
 
     @Override
     public void notifyObserver(Pair pair) {
-        if (pair != null) {
+
+        if (pair != null&&pair.getTenChangedVolume()!=null&&pair.getThirtyChangedVolume()!=null&&pair.getSixHourChangedVolume()!=null) {
+            if (pair.getTenChangedVolume() >=5 && pair.getThirtyChangedVolume() >= 5
+                    &&pair.getThreeChangedVolume() >= 5
+                    &&pair.getSixHourChangedVolume() >= 0) {
+                telegramObserver.handleVolumeChange(pair);
+            }
+
+
+
+            if (pair.getTenChanged() >=5 && pair.getThirtyChanged() >= 5
+                    &&pair.getThreeChanged() >= 5
+                    &&pair.getSixHourChanged() >= 0) {
+                telegramObserver.handlePriceChange(pair);
+            }
+
+
+        }
+
+        /*   if (pair != null) {
             if (pair.getOneChangedVolume() != null && pair.getOneChangedVolume() >= 5) {
                 telegramObserver.handle1minChange(pair);
 
@@ -107,6 +126,6 @@ public class BittrexRunner implements ISubject {
                 telegramObserver.handle5minChange(pair);
 
             }
-        }
+        }*/
     }
 }

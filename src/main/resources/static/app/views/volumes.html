@@ -2,13 +2,13 @@
 
 <div class="container">
 
-View <select ng-model="prop.value" ng-options="v for v in prop.values" ng-change="setItemsPerPage(prop.value)" style="margin-bottom:10px;">
+View <select ng-model="prop.value" ng-options="v for v in prop.values" ng-change="setItemsPerPage(prop.value)" style="margin-bottom:11px;">
  </select> records at a time.
  <div class="topright">
- <md-button class="md-raised md-primary"  ng-click="sortTypeVolume =  ['oneChangedVolume','twoChangedVolume','threeChangedVolume','fourChangedVolume','fiveChangedVolume','tenChangedVolume','thirtyChangedVolume','hourChangedVolume'] ; sortReverse=!sortReverse">sort by best volume</md-button>
+ <md-button class="md-raised md-primary"  ng-click="sortTypeVolume =  ['thirtyChangedVolume'] ; sortReverse=!sortReverse">sort by best volume</md-button>
 </div>
 </div>
-<table class="table   table-bordered table-striped">
+<table class="table   table-bordered table-striped table-sm table-hover"  style="font-size:12px;">
 
   <thead>
     <tr>
@@ -21,6 +21,15 @@ View <select ng-model="prop.value" ng-options="v for v in prop.values" ng-change
            <span  ng-show="sortTypeVolume == 'star' && sortReverse" class="fa fa-caret-up"></span>
         </a>
       </td>
+        <!--<td title="Whats going on?">State</td>-->
+
+        <td title="Whats going on?">
+            <a href="#" ng-click="sortType = 'rocketV'; sortReverse=!sortReverse">
+                State
+                <span ng-show="sortType == 'rocketV' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'rocketV' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
 
       <td>
         <a href="#" ng-click="sortTypeVolume = 'name'; sortReverse=!sortReverse">
@@ -29,6 +38,8 @@ View <select ng-model="prop.value" ng-options="v for v in prop.values" ng-change
            <span  ng-show="sortTypeVolume == 'name' && sortReverse" class="fa fa-caret-up"></span>
         </a>
       </td>
+
+
 
       <td>
         <a href="#" ng-click="sortTypeVolume = 'oneChangedVolume'; sortReverse=!sortReverse">
@@ -116,13 +127,41 @@ View <select ng-model="prop.value" ng-options="v for v in prop.values" ng-change
             </a>
       </td>
 
-      <td>
-        <a href="#" ng-click="sortTypeVolume = 'allTimeChangedVolume'; sortReverse=!sortReverse">
-              all
-              <span ng-show="sortTypeVolume == 'allTimeChangedVolume' && !sortReverse" class="fa fa-caret-down"></span>
-              <span ng-show="sortTypeVolume == 'allTimeChangedVolume' && sortReverse" class="fa fa-caret-up"></span>
+        <td>
+            <a href="#" ng-click="sortTypeVolume = 'changed24Volume'; sortReverse=!sortReverse">
+                24hours
+                <span ng-show="sortTypeVolume == 'changed24Volume' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortTypeVolume == 'changed24Volume' && sortReverse" class="fa fa-caret-up"></span>
             </a>
-      </td>
+        </td>
+
+        <td>
+            <a href="#" ng-click="sortTypeVolume = 'changed3dayVolume'; sortReverse=!sortReverse">
+                3day
+                <span ng-show="sortTypeVolume == 'changed3dayVolume' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortTypeVolume == 'changed3dayVolume' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+        <td>
+            <a href="#" ng-click="sortTypeVolume = 'changed5dayVolume'; sortReverse=!sortReverse">
+                5day
+                <span ng-show="sortTypeVolume == 'changed5dayVolume' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortTypeVolume == 'changed5dayVolume' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+        <td>
+            <a href="#" ng-click="sortTypeVolume = 'changed7dayVolume'; sortReverse=!sortReverse">
+                7day
+                <span ng-show="sortTypeVolume == 'changed7dayVolume' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortTypeVolume == 'changed7dayVolume' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+
+
+
     </tr>
   </thead>
 
@@ -138,9 +177,14 @@ View <select ng-model="prop.value" ng-options="v for v in prop.values" ng-change
 
 
       </td>
+        <td><img   ng-src="{{isRocketV(pair)}}" width="25" height="25"></td>
 
-      <td><a target="_blank" href="https://bittrex.com/Market/Index?MarketName={{ pair.name }}">{{ pair.name }}</a></td>
-      <!--    <td d3Visualization   ng-class="{red: (pair.oneChanged <0), green: (pair.oneChanged >=0)}">{{ pair.oneChanged }}</td>-->
+        <td><a ng-show="userAdmin" target="_blank" href="https://bittrex.com/Market/Index?MarketName={{ pair.name }}"><span class="fa fa-lock-o"></span>{{ pair.name }}</a><i style="margin-left:17px;" ng-show="!userAdmin" class="fa fa-lock"></i></td>
+
+
+
+
+            <!--    <td d3Visualization   ng-class="{red: (pair.oneChanged <0), green: (pair.oneChanged >=0)}">{{ pair.oneChanged }}</td>-->
       <td animate-on-change='pair.oneChangedVolume' ng-class="{red: (pair.oneChangedVolume <0), green: (pair.oneChangedVolume >=0)}"><i ng-class="{down: (pair.oneChangedVolume <0), up: (pair.oneChangedVolume >=0)}"></i>{{ pair.oneChangedVolume }}%</td>
         <td animate-on-change='pair.twoChangedVolume' ng-class="{red: (pair.twoChangedVolume <0), green: (pair.twoChangedVolume >=0)}"><i ng-class="{down: (pair.twoChangedVolume <0), up: (pair.twoChangedVolume >=0)}"></i>{{ pair.twoChangedVolume }}%</td>
         <td animate-on-change='pair.threeChangedVolume' ng-class="{red: (pair.threeChangedVolume <0), green: (pair.threeChangedVolume >=0)}"><i ng-class="{down: (pair.threeChangedVolume <0), up: (pair.threeChangedVolume >=0)}"></i>{{ pair.threeChangedVolume }}%</td>
@@ -157,7 +201,12 @@ View <select ng-model="prop.value" ng-options="v for v in prop.values" ng-change
       <td animate-on-change='pair.threeHourChangedVolume' ng-class="{red: (pair.threeHourChangedVolume <0), green: (pair.threeHourChangedVolume >=0)}"><i ng-class="{down: (pair.threeHourChangedVolume <0), up: (pair.threeHourChangedVolume >=0)}"></i>{{ pair.threeHourChangedVolume }}%</td>
       <td animate-on-change='pair.sixHourChangedVolume' ng-class="{red: (pair.sixHourChangedVolume <0), green: (pair.sixHourChangedVolume >=0)}"><i ng-class="{down: (pair.sixHourChangedVolume <0), up: (pair.sixHourChangedVolume >=0)}"></i>{{ pair.sixHourChangedVolume }}%</td>
       <td animate-on-change='pair.twentyHourChangedVolume' ng-class="{red: (pair.twentyHourChangedVolume <0), green: (pair.twentyHourChangedVolume >=0)}"><i ng-class="{down: (pair.twentyHourChangedVolume <0), up: (pair.twentyHourChanged >=0)}"></i>{{ pair.twentyHourChangedVolume }}%</td>
-      <td animate-on-change='pair.allTimeChangedVolume' ng-class="{red: (pair.allTimeChangedVolume <0), green: (pair.allTimeChangedVolume >=0)}"><i ng-class="{down: (pair.allTimeChangedVolume <0), up: (pair.allTimeChangedVolume >=0)}"></i>{{ pair.allTimeChangedVolume }}%</td>
+   <!-- 24h-->   <td animate-on-change='pair.changed24Volume' ng-class="{red: (pair.changed24Volume <0), green: (pair.changed24Volume >=0)}"><i ng-class="{down: (pair.changed24Volume <0), up: (pair.changed24Volume >=0)}"></i>{{ pair.changed24Volume }}%</td>
+        <!-- 2day-->   <td animate-on-change='pair.changed3dayVolume' ng-class="{red: (pair.changed3dayVolume <0), green: (pair.changed3dayVolume >=0)}"><i ng-class="{down: (pair.changed3dayVolume <0), up: (pair.changed3dayVolume >=0)}"></i>{{ pair.changed3dayVolume }}%</td>
+        <!-- 7day-->   <td animate-on-change='pair.changed5dayVolume' ng-class="{red: (pair.changed5dayVolume <0), green: (pair.changed5dayVolume >=0)}"><i ng-class="{down: (pair.changed5dayVolume <0), up: (pair.changed5dayVolume >=0)}"></i>{{ pair.changed5dayVolume }}%</td>
+        <!-- 15day-->   <td animate-on-change='pair.changed7dayVolume' ng-class="{red: (pair.changed7dayVolume <0), green: (pair.changed7dayVolume >=0)}"><i ng-class="{down: (pair.changed7dayVolume <0), up: (pair.changed7dayVolume >=0)}"></i>{{ pair.changed7dayVolume }}%</td>
+
+
     </tr>
   </tbody>
 </table>

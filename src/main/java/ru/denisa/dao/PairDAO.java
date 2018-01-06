@@ -249,6 +249,21 @@ public class PairDAO {
     }
 
 
+    public Pair getFirstPair12Hours(String pairName) {
+        if (twelveHourCache == null) {
+
+            twelveHourCache = Caffeine.newBuilder()
+                    .maximumSize(1000)
+                    .refreshAfterWrite(12, TimeUnit.HOURS)
+                    .build(name -> { // Using a jOOQ repository
+
+
+                        return dbSelect.getFirstPair12HoursDB(name);
+                    });
+        }
+        return twelveHourCache.get(pairName);
+    }
+
     public Pair getFirstPair24Hours(String pairName) {
         if (twelveHourCache == null) {
 
@@ -265,7 +280,39 @@ public class PairDAO {
     }
 
 
-    public Pair getFirstPairAllTime(String pairName) {
+    public Pair getFirstPair3Day(String pairName) {
+        if (weekCache == null) {
+
+            weekCache = Caffeine.newBuilder()
+                    .maximumSize(1000)
+                    .refreshAfterWrite(3, TimeUnit.DAYS)
+                    .build(name -> { // Using a jOOQ repository
+
+
+                        return dbSelect.getFirstPair3DayDB(name);
+                    });
+        }
+        return weekCache.get(pairName);
+
+    }
+    public Pair getFirstPair5Day(String pairName) {
+        if (weekCache == null) {
+
+            weekCache = Caffeine.newBuilder()
+                    .maximumSize(1000)
+                    .refreshAfterWrite(5, TimeUnit.DAYS)
+                    .build(name -> { // Using a jOOQ repository
+
+
+                        return dbSelect.getFirstPair5DayDB(name);
+                    });
+        }
+        return weekCache.get(pairName);
+
+    }
+
+
+    public Pair getFirstPair7Day(String pairName) {
         if (weekCache == null) {
 
             weekCache = Caffeine.newBuilder()
@@ -274,12 +321,18 @@ public class PairDAO {
                     .build(name -> { // Using a jOOQ repository
 
 
-                        return dbSelect.getFirstPairAllTimeDB(name);
+                        return dbSelect.getFirstPair7DayDB(name);
                     });
         }
         return weekCache.get(pairName);
 
     }
+
+
+
+
+
+
 
 
 }

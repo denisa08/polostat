@@ -90,6 +90,18 @@ private MongoOperations mongoOperations;
         return mongoOperations.findOne(beetwenQuery, Pair.class);
     }
 
+    public Pair getFirstPair12HoursDB(String pairName) {
+        Long dateNow = ZonedDateTime.now().toEpochSecond();
+        Long fiveLast = ZonedDateTime.now(ZoneOffset.UTC).minusHours(12).toEpochSecond();
+        Query beetwenQuery = new Query();
+
+        beetwenQuery.addCriteria(Criteria.where("name").is(pairName));
+        beetwenQuery.addCriteria(Criteria.where("date").gte(fiveLast).lte(dateNow)).limit(1);
+        return mongoOperations.findOne(beetwenQuery, Pair.class);
+    }
+
+
+
     public Pair getFirstPair24HoursDB(String pairName) {
         Long dateNow = ZonedDateTime.now().toEpochSecond();
         Long fiveLast = ZonedDateTime.now(ZoneOffset.UTC).minusHours(24).toEpochSecond();
@@ -185,4 +197,36 @@ private MongoOperations mongoOperations;
         beetwenQuery.addCriteria(Criteria.where("date").gte(fiveLast).lte(dateNow)).limit(1);
         return mongoOperations.findOne(beetwenQuery, Pair.class);
     }
+
+    public Pair getFirstPair3DayDB(String pairName) {
+        Long dateNow = ZonedDateTime.now().toEpochSecond();
+        Long fiveLast = ZonedDateTime.now(ZoneOffset.UTC).minusDays(3).toEpochSecond();
+        Query beetwenQuery = new Query();
+        beetwenQuery.addCriteria(Criteria.where("name").is(pairName));
+
+        beetwenQuery.addCriteria(Criteria.where("date").gte(fiveLast).lte(dateNow)).limit(1);
+        return mongoOperations.findOne(beetwenQuery, Pair.class);
+     }
+
+    public Pair getFirstPair5DayDB(String pairName) {
+        Long dateNow = ZonedDateTime.now().toEpochSecond();
+        Long fiveLast = ZonedDateTime.now(ZoneOffset.UTC).minusDays(5).toEpochSecond();
+        Query beetwenQuery = new Query();
+        beetwenQuery.addCriteria(Criteria.where("name").is(pairName));
+
+        beetwenQuery.addCriteria(Criteria.where("date").gte(fiveLast).lte(dateNow)).limit(1);
+        return mongoOperations.findOne(beetwenQuery, Pair.class);
+    }
+
+
+    public Pair getFirstPair7DayDB(String pairName) {
+        Long dateNow = ZonedDateTime.now().toEpochSecond();
+        Long fiveLast = ZonedDateTime.now(ZoneOffset.UTC).minusDays(5).toEpochSecond();
+        Query beetwenQuery = new Query();
+        beetwenQuery.addCriteria(Criteria.where("name").is(pairName));
+
+        beetwenQuery.addCriteria(Criteria.where("date").gte(fiveLast).lte(dateNow)).limit(1);
+        return mongoOperations.findOne(beetwenQuery, Pair.class);
+    }
+
 }

@@ -53,6 +53,7 @@ public class PairCreator {
         pair.setLow(low);
         pair.setLast(last);
         pair.setVolume(volume);
+        pair.setExp(new Date());
         pair.setBaseVolume(baseVolume);
         //check if this first record
        // log.info("get LAST PAIR time {}", dateFormat.format(new Date()));
@@ -97,20 +98,47 @@ public class PairCreator {
          //   log.info("getFirstPair6Hours time {}", dateFormat.format(new Date()));
             Pair sixHoursPair = pairRepo.getFirstPair6Hours(pairName);
           //  log.info("OK:getFirstPair6Hours time {}", dateFormat.format(new Date()));
+            Pair twentyHourPair = pairRepo.getFirstPair12Hours(pairName);
+
+
 
           //  log.info("getFirstPair24Hours time {}", dateFormat.format(new Date()));
-            Pair tfHoursPair = pairRepo.getFirstPair24Hours(pairName);
-          //  log.info("OK:getFirstPair24Hours time {}", dateFormat.format(new Date()));
+            Pair pair24 = pairRepo.getFirstPair24Hours(pairName);
 
-          //  log.info("getFirstPairAllTime time {}", dateFormat.format(new Date()));
-            Pair alltimePair = pairRepo.getFirstPairAllTime(pairName);
-          //  log.info("OK:getFirstPairAllTime time {}", dateFormat.format(new Date()));
 
-          //  log.info("set coefficents.. time {}", dateFormat.format(new Date()));
+            Pair pair3 = pairRepo.getFirstPair3Day(pairName);
+            Pair pair5 = pairRepo.getFirstPair5Day(pairName);
+            Pair pair7 = pairRepo.getFirstPair7Day(pairName);
+
+
 
             pair.setOneChanged((getPriceChange(lastPair.getLast(), last)));
             pair.setOneChangedVolume(getVolumeChange(lastPair.getVolume(), volume));
 
+
+
+            if (twentyHourPair != null && twentyHourPair.getLast() != null) {
+                pair.setTwentyHourChanged(getPriceChange(twentyHourPair.getLast(), last));
+                pair.setTwentyHourChangedVolume(getVolumeChange(twentyHourPair.getVolume(), volume));
+            }
+
+
+            if (pair3 != null && pair3.getLast() != null) {
+                pair.setChanged3day(getPriceChange(pair3.getLast(), last));
+                pair.setChanged3dayVolume(getVolumeChange(pair3.getVolume(), volume));
+            }
+
+
+            if (pair5 != null && pair5.getLast() != null) {
+                pair.setChanged5day(getPriceChange(pair5.getLast(), last));
+                pair.setChanged5dayVolume(getVolumeChange(pair5.getVolume(), volume));
+            }
+
+
+            if (pair7 != null && pair7.getLast() != null) {
+                pair.setChanged7day(getPriceChange(pair7.getLast(), last));
+                pair.setChanged7dayVolume(getVolumeChange(pair7.getVolume(), volume));
+            }
 
             if (twominutesPair != null && twominutesPair.getLast() != null) {
                 pair.setTwoChanged(getPriceChange(twominutesPair.getLast(), last));
@@ -164,18 +192,18 @@ public class PairCreator {
 
 
             }
-            if (tfHoursPair != null && tfHoursPair.getLast() != null) {
-                pair.setTwentyHourChanged(getPriceChange(tfHoursPair.getLast(), last));
-                pair.setTwentyHourChangedVolume(getVolumeChange(tfHoursPair.getVolume(), volume));
+            if (pair24 != null && pair24.getLast() != null) {
+                pair.setChanged24(getPriceChange(pair24.getLast(), last));
+                pair.setChanged24Volume(getVolumeChange(pair24.getVolume(), volume));
             }
 
 
-            if (alltimePair != null && alltimePair.getLast() != null) {
+     /*       if (alltimePair != null && alltimePair.getLast() != null) {
                 pair.setAllTimeChanged(getPriceChange(alltimePair.getLast(), last));
                 pair.setAllTimeChangedVolume(getVolumeChange(alltimePair.getVolume(), volume));
 
 
-            }
+            }*/
            // log.info("OK:set coefficents.. time {}", dateFormat.format(new Date()));
 
         }

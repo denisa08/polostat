@@ -54,7 +54,13 @@ public class TelegramFacade implements InitializingBean {
     }
 
     public void sendMessage(Long chatId, String message) {
-        telegramBot.sendMsg(chatId, message);
+        try{
+            telegramBot.sendMsg(chatId, message);
+        }
+        catch (Exception ex){
+            log.error(ex.getMessage());
+        }
+
     }
 
 
