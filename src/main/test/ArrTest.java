@@ -1,5 +1,8 @@
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -9,19 +12,8 @@ import java.util.Set;
 public class ArrTest {
 
     @Test
-    public void set_test(){
-        Set<String> testSet = new LinkedHashSet<>();
-        testSet.add("test1");
-        testSet.add("test1");
-        testSet.add("test2");
-        testSet.add("test3");
-        testSet.add("test2");
-        testSet.add("test4");
-        testSet.add("test5");
+    public void set_test() throws IOException {
 
-        testSet.clear();
-
-        System.out.println(testSet);
 
 
 

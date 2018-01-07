@@ -17,25 +17,53 @@ import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 /**
  * Created by d.aleksandrov on 24.08.2017.
  */
 @Profile("dev")
 @Configuration
-public class MongoSimpleConf {
-    private static final String MONGO_DB_URL = "localhost";
-    private static final String MONGO_DB_NAME = "embeded_db";
+public class MongoSimpleConf  extends AbstractMongoConfiguration {
+    @Value("${spring.data.mongodb.host}")
+    private String host;
 
-    @Bean
-    public MongoTemplate mongoTemplate() throws IOException {
-        EmbeddedMongoFactoryBean mongo = new EmbeddedMongoFactoryBean();
-        mongo.setBindIp(MONGO_DB_URL);
-        MongoClient mongoClient = mongo.getObject();
-        MongoTemplate mongoTemplate = new MongoTemplate(mongoClient, MONGO_DB_NAME);
-        return mongoTemplate;
+    @Value("${spring.data.mongodb.port}")
+    private Integer port;
+
+    @Value("${spring.data.mongodb.database}")
+    private String database;
+
+    public @Bean
+    MongoDbFactory mongoDbFactory() throws Exception {
+        return new SimpleMongoDbFactory(new MongoClient(this.host + ":" + this.port), database);
     }
+
+    public @Bean
+    MongoTemplate mongoTemplate() throws Exception {
+        MappingMongoConverter converter = new MappingMongoConverter(new DefaultDbRefResolver(mongoDbFactory()),
+                new MongoMappingContext());
+        converter.setMapKeyDotReplacement("\\+");
+
+        MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory(), converter);
+
+        return mongoTemplate;
+
+    }
+
+    @Override
+    protected String getDatabaseName() {
+        return this.database;
+    }
+
+    @Override
+    public Mongo mongo() throws Exception {
+        return new MongoClient(this.host, this.port);
+    }
+
+
 
 
 }
