@@ -84,7 +84,7 @@ public class PoloniexExchangeService implements ExchangeService
             String tickerData = publicClient.returnTicker();
             tickerResult = mapper.mapTickerForCurrency(currencyPair, tickerData);
             //added by denis aleksandrov
-            currencyPair.replace("_","-");
+            currencyPair= currencyPair.replace("_","-");
             tickerResult.setName(currencyPair);
             LOG.trace("Retrieved and mapped {} ticker in {} ms", currencyPair, System.currentTimeMillis() - start);
         }

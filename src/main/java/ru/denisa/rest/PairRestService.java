@@ -2,11 +2,12 @@ package ru.denisa.rest;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import ru.denisa.arbitrage.service.ArbitrageService;
 import ru.denisa.dao.PairDAO;
+import ru.denisa.model.ArbitragePair;
 import ru.denisa.model.BittrexPair;
 import ru.denisa.model.Pair;
 
@@ -23,6 +24,9 @@ public class PairRestService {
 
     @Autowired
     private PairDAO pairDAO;
+
+    @Autowired
+    private ArbitrageService  arbitrageService;
 
 
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(PairRestService.class);
@@ -44,6 +48,20 @@ public class PairRestService {
         }
         return pairs;
     }
+
+    /*88
+    Арбитражный метод поло-битра
+     */
+
+
+    @RequestMapping(path = "/polobtx", method = RequestMethod.GET)
+    public List<ArbitragePair> polobtx() {
+
+        return  arbitrageService.getPairs();
+
+    }
+
+
 
 
 }

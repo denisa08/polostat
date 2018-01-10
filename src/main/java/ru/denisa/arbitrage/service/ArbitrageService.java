@@ -8,11 +8,13 @@ import org.springframework.stereotype.Component;
 import ru.denisa.dao.PairDAO;
 import ru.denisa.model.ArbitragePair;
 import ru.denisa.model.Pair;
-import ru.denisa.poloniex.service.PoloniexRunner;
+import ru.denisa.poloniex.dao.PoloniexDao;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.*;
 
 /**
  * Created by d.aleksandrov on 04.01.2018.
@@ -23,45 +25,66 @@ import java.util.ArrayList;
 @Component
 public class ArbitrageService {
 
-    @Autowired
-    PoloniexRunner poloniexRunner;
 
     @Autowired
-    private PairDAO pairDAO;
+    PoloniexDao poloniexDao;
 
+    @Autowired
+    PairDAO pairDAO;
 
     private ArrayList<Pair> bittrexPairs;
     private ArrayList<PoloniexTicker> poloniexTickers;
+    ExecutorService executor = Executors.newSingleThreadExecutor();
 
 
     private ArrayList<ArbitragePair> pairs;
 
+    Future<?> future;
+
+
+    //Реализовать callable
+
 
     public ArrayList<ArbitragePair> getPairs() {
 
-        //получаем пары из полоникса
-        poloniexTickers = poloniexRunner.getTickers();
-
-        poloniexTickers.forEach(poloniexTicker -> {
-            ArbitragePair arbitragePair = new ArbitragePair();
-
-
+        ArrayList<ArbitragePair> arbitragePairs = new ArrayList<>();
+        if (future == null || !future.isDone()) {
             //получаем пары из битрекса
-            Pair pair = pairDAO.getLastPair(poloniexTicker.getName());
+            future = executor.submit(() -> {
+                poloniexTickers = poloniexDao.getTickers();
 
 
+            });
+        }
 
-            arbitragePair.setName(poloniexTicker.getName());
-            arbitragePair.setLastBtxPrice(pair.getLast());
-            arbitragePair.setLastBtxVolume(poloniexTicker.getLast());
-            arbitragePair.setLastPoloVolume(poloniexTicker.getQuoteVolume().doubleValue());
-            arbitragePair.setLastBtxVolume(pair.getVolume());
-            arbitragePair.setPriceDiff( getPriceChange(pair.getLast(),poloniexTicker.getLast()));
+        if (poloniexTickers != null) {
+
+            poloniexTickers.forEach(poloniexTicker -> {
 
 
-        });
+                ArbitragePair arbitragePair = new ArbitragePair();
 
-        return null;
+                Pair pair = pairDAO.getLastPair(poloniexTicker.getName());
+                if (pair != null) {
+                    arbitragePair.setName(poloniexTicker.getName());
+                    arbitragePair.setLastPoloPrice(poloniexTicker.getLast());
+                    arbitragePair.setLastBtxPrice(pair.getLast());
+                     arbitragePair.setLastPoloVolume(poloniexTicker.getQuoteVolume().doubleValue());
+                    arbitragePair.setLastBtxVolume(pair.getVolume());
+                    arbitragePair.setPriceDiff(getPriceChange(pair.getLast(), poloniexTicker.getLast()));
+                    arbitragePairs.add(arbitragePair);
+                }
+
+
+            });
+
+            future = null;
+
+
+        }
+
+
+        return arbitragePairs;
 
 
     }
@@ -72,13 +95,13 @@ public class ArbitrageService {
 
         try {
             newValue = ((two - one) / one) * 100;
-            return truncatedDouble(newValue);
 
         } catch (Exception ex) {
             log.error(ex.getMessage());
+            return null;
         }
 
-        return null;
+        return truncatedDouble(newValue);
 
 
     }
@@ -89,13 +112,14 @@ public class ArbitrageService {
 
         try {
             truncatedDouble = BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_UP).doubleValue();
-            return truncatedDouble;
 
         } catch (Exception ex) {
             log.error(ex.getMessage());
+            return null;
         }
 
-        return null;
+        return truncatedDouble;
+
     }
 
 

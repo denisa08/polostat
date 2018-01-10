@@ -261,8 +261,7 @@ if (!resultAllTimeChangedVolume){
 	 $scope.pageChanged = function() {
    	  var startPos = ($scope.page - 1) *  $scope.itemsPerPage;
    	  //$scope.displayItems = $scope.totalItems.slice(startPos, startPos + 3);
-   	  console.log($scope.page);
-   	};
+    	};
 
 
 

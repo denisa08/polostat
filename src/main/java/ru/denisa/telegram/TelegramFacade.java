@@ -58,7 +58,7 @@ public class TelegramFacade implements InitializingBean {
             telegramBot.sendMsg(chatId, message);
         }
         catch (Exception ex){
-            log.error(ex.getMessage());
+
         }
 
     }

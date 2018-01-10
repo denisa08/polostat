@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 //
 
-@Profile("dev")
+
 @SpringBootApplication
 @EnableScheduling
 @ComponentScan(basePackages = "ru.denisa")
@@ -25,7 +25,8 @@ public class TestBoot {
     public static void main(String[] args) {
 
         SpringApplication.run(TestBoot.class, args);
-    }
+
+     }
 
 
 }

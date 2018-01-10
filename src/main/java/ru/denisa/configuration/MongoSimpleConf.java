@@ -2,8 +2,7 @@ package ru.denisa.configuration;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
-import cz.jirutka.spring.embedmongo.EmbeddedMongoFactoryBean;
-import org.springframework.beans.factory.annotation.Value;
+ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -27,13 +26,13 @@ import java.nio.file.Files;
 @Profile("dev")
 @Configuration
 public class MongoSimpleConf  extends AbstractMongoConfiguration {
-    @Value("${spring.data.mongodb.host}")
+    @Value("${spring.data.local.mongodb.host}")
     private String host;
 
-    @Value("${spring.data.mongodb.port}")
+    @Value("${spring.data.local.mongodb.port}")
     private Integer port;
 
-    @Value("${spring.data.mongodb.database}")
+    @Value("${spring.data.local.mongodb.database}")
     private String database;
 
     public @Bean

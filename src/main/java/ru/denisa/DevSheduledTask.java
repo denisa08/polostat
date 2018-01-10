@@ -43,7 +43,7 @@ public class DevSheduledTask {
 
 
     // @Scheduled(fixedRate = 300000)
-    @Scheduled(fixedRate = 300000)
+    @Scheduled(fixedRate = 10000)
     public synchronized void go() throws Exception {
         log.info("The time is now {}", dateFormat.format(new Date()));
         bittrexRunner.getLastMarket();

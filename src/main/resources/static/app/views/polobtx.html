@@ -1,0 +1,63 @@
+<div class="alert alert-info">
+    Update every 5 minutes. Last updated at: <span>{{lastArbUpdate}}</span>
+</div>
+
+<div class="container">
+
+    <table class="table   table-bordered table-striped table-sm table-hover" style="font-size:12px;">
+
+    <thead>
+    <tr>
+
+          <td>
+            <a ng-click="sortBTXType = 'name'; sortBTXReverse=!sortBTXReverse">
+                Name
+                <span ng-show="sortBTXType == 'name' && !sortBTXReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortBTXType == 'name' && sortBTXReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+        <td>
+            <a  ng-click="sortBTXType = 'lastPoloPrice'; sortBTXReverse=!sortBTXReverse">
+                Poloniex Price
+                <span ng-show="sortBTXType == 'lastPoloPrice' && sortBTXReverse" class="fa fa-caret-up"></span>
+                <span ng-show="sortBTXType == 'lastPoloPrice' && !sortBTXReverse" class="fa fa-caret-down"></span>
+            </a>
+        </td>
+        <td>
+            <a  ng-click="sortBTXType = 'lastBtxPrice'; sortBTXReverse=!sortBTXReverse">
+                Bittrex Price
+                <span ng-show="sortBTXType == 'lastBtxPrice' && !sortBTXReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortBTXType == 'lastBtxPrice' && sortBTXReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+        <td>
+            <a  ng-click="sortBTXType = 'twoChanged'; sortBTXReverse=!sortBTXReverse">
+                Price difference
+                <span ng-show="sortBTXType == 'twoChanged' && !sortBTXReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortBTXType == 'twoChanged' && sortBTXReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+    </tr>
+    </thead>
+
+    <tbody>
+    <!--  <tr ng-animate=" 'animate' " ng-repeat="pair in pairs | orderBy['-oneChanged','-fiveChanged','-tenChanged','-thirtyChanged','-hourChanged'] | filter:searchFish | limitTo:itemsPerPage:itemsPerPage*(page-1)">-->
+    <tr ng-animate=" 'animate' "
+        ng-repeat="pair in polobtxpairs | orderBy:sortBTXType:sortBTXReverse">
+        <td> {{ pair.name }}
+        </td>
+        <td>{{ pair.lastPoloPrice }}
+        </td>
+        <td>{{ pair.lastBtxPrice }}
+        </td>
+        <td>{{ pair.priceDiff }} %
+        </td>
+
+
+
+    </tr>
+    </tbody>
+</table>
+</div>

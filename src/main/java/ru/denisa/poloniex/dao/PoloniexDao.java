@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -46,7 +47,7 @@ public class PoloniexDao implements InitializingBean {
 
             fiveMinuteCache = Caffeine.newBuilder()
                     .maximumSize(100)
-                    .refreshAfterWrite(270000, TimeUnit.MILLISECONDS)
+                    .refreshAfterWrite(180000, TimeUnit.MILLISECONDS)
                     .build(ticker -> { // Using a jOOQ repository
                         log.info("update PoloniexDao cache,attempt to add new ticker = "+ticker, dateFormat.format(new Date()));
                         PoloniexExchangeService service = new PoloniexExchangeService(apiKey, apiSecret);
@@ -59,9 +60,11 @@ public class PoloniexDao implements InitializingBean {
     }
 
 
+    //Получить все тикеры. Тикеры берем из пропертисов.
+
     public ArrayList<PoloniexTicker> getTickers() {
         ArrayList<PoloniexTicker> poloniexTickers = new ArrayList<>();
-        Arrays.stream(poloniexPairs).forEach(ticker -> poloniexTickers.add(getLastTicker(ticker)));
+        Arrays.stream(poloniexPairs).forEach(ticker -> poloniexTickers.add( getLastTicker(ticker)));
         return poloniexTickers;
     }
 
