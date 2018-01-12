@@ -5,15 +5,14 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.denisa.dao.PairDAO;
-import ru.denisa.model.ArbitragePair;
-import ru.denisa.model.Pair;
+import ru.denisa.bittrex.dao.PairDAO;
+import ru.denisa.arbitrage.model.ArbitragePair;
+import ru.denisa.bittrex.model.Pair;
 import ru.denisa.poloniex.dao.PoloniexDao;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.*;
 
 /**

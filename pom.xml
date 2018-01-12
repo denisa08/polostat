@@ -31,10 +31,26 @@
         </dependency>
         <!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
         <dependency>
-            <groupId>javax.ws.rs</groupId>
+      <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
             <version>2.1</version>
         </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.knowm.xchange/xchange-cryptopia -->
+        <dependency>
+            <groupId>org.knowm.xchange</groupId>
+            <artifactId>xchange-cryptopia</artifactId>
+            <version>4.3.2</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.knowm.xchange</groupId>
+            <artifactId>xchange-poloniex</artifactId>
+            <version>4.3.2</version>
+        </dependency>
+
 
 
 

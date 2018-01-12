@@ -6,10 +6,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-import ru.denisa.dao.SequenceDAO;
-import ru.denisa.model.AccessToken;
-import ru.denisa.model.AppUser;
+import ru.denisa.bittrex.dao.db.SequenceDAO;
+import ru.denisa.dao.users.AccessToken;
+import ru.denisa.model.user.AppUser;
 
 /**
  * Created by d.aleksandrov on 12.11.2017.
