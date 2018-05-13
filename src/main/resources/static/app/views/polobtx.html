@@ -18,24 +18,49 @@
         </td>
         <td>
             <a  ng-click="sortBTXType = 'lastPoloPrice'; sortBTXReverse=!sortBTXReverse">
-                Poloniex Price
+                Poloniex price
                 <span ng-show="sortBTXType == 'lastPoloPrice' && sortBTXReverse" class="fa fa-caret-up"></span>
                 <span ng-show="sortBTXType == 'lastPoloPrice' && !sortBTXReverse" class="fa fa-caret-down"></span>
             </a>
         </td>
         <td>
             <a  ng-click="sortBTXType = 'lastBtxPrice'; sortBTXReverse=!sortBTXReverse">
-                Bittrex Price
+                Bittrex price
                 <span ng-show="sortBTXType == 'lastBtxPrice' && !sortBTXReverse" class="fa fa-caret-down"></span>
                 <span ng-show="sortBTXType == 'lastBtxPrice' && sortBTXReverse" class="fa fa-caret-up"></span>
             </a>
         </td>
 
         <td>
-            <a  ng-click="sortBTXType = 'twoChanged'; sortBTXReverse=!sortBTXReverse">
-                Price difference
-                <span ng-show="sortBTXType == 'twoChanged' && !sortBTXReverse" class="fa fa-caret-down"></span>
-                <span ng-show="sortBTXType == 'twoChanged' && sortBTXReverse" class="fa fa-caret-up"></span>
+            <a  ng-click="sortBTXType = 'lastCryptoPiaPrice'; sortBTXReverse=!sortBTXReverse">
+                Cryptopia price
+                <span ng-show="sortBTXType == 'lastCryptoPiaPrice' && !sortBTXReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortBTXType == 'lastCryptoPiaPrice' && sortBTXReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+        <td>
+            <a  ng-click="sortBTXType = 'buyIn'; sortBTXReverse=!sortBTXReverse">
+                BuyIn
+                <span ng-show="sortBTXType == 'buyIn' && !sortBTXReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortBTXType == 'buyIn' && sortBTXReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+
+        <td>
+            <a  ng-click="sortBTXType = 'sellIn'; sortBTXReverse=!sortBTXReverse">
+                SellIn
+                <span ng-show="sortBTXType == 'sellIn' && !sortBTXReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortBTXType == 'sellIn' && sortBTXReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+        <td>
+            <a  ng-click="sortBTXType = 'profit'; sortBTXReverse=!sortBTXReverse">
+                Profit (%)
+                <span ng-show="sortBTXType == 'profit' && !sortBTXReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortBTXType == 'profit' && sortBTXReverse" class="fa fa-caret-up"></span>
             </a>
         </td>
 
@@ -52,7 +77,16 @@
         </td>
         <td>{{ pair.lastBtxPrice }}
         </td>
-        <td>{{ pair.priceDiff }} %
+        <td>{{ pair.lastCryptoPiaPrice }}
+        </td>
+
+        <td>{{ pair.buyIn }}
+        </td>
+
+        <td>{{ pair.sellIn }}
+        </td>
+
+        <td>{{ pair.profit }}%
         </td>
 
 

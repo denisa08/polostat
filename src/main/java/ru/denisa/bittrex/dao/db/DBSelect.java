@@ -199,7 +199,7 @@ private MongoOperations mongoOperations;
 
     public Pair getFirstPair3DayDB(String pairName) {
         Long dateNow = ZonedDateTime.now().toEpochSecond();
-        Long fiveLast = ZonedDateTime.now(ZoneOffset.UTC).minusDays(3).toEpochSecond();
+        Long fiveLast = ZonedDateTime.now(ZoneOffset.UTC).minusHours(72).toEpochSecond();
         Query beetwenQuery = new Query();
         beetwenQuery.addCriteria(Criteria.where("name").is(pairName));
 
@@ -209,7 +209,7 @@ private MongoOperations mongoOperations;
 
     public Pair getFirstPair5DayDB(String pairName) {
         Long dateNow = ZonedDateTime.now().toEpochSecond();
-        Long fiveLast = ZonedDateTime.now(ZoneOffset.UTC).minusDays(5).toEpochSecond();
+        Long fiveLast = ZonedDateTime.now(ZoneOffset.UTC).minusHours(120).toEpochSecond();
         Query beetwenQuery = new Query();
         beetwenQuery.addCriteria(Criteria.where("name").is(pairName));
 
@@ -220,7 +220,7 @@ private MongoOperations mongoOperations;
 
     public Pair getFirstPair7DayDB(String pairName) {
         Long dateNow = ZonedDateTime.now().toEpochSecond();
-        Long fiveLast = ZonedDateTime.now(ZoneOffset.UTC).minusDays(5).toEpochSecond();
+        Long fiveLast = ZonedDateTime.now(ZoneOffset.UTC).minusHours(168).toEpochSecond();
         Query beetwenQuery = new Query();
         beetwenQuery.addCriteria(Criteria.where("name").is(pairName));
 

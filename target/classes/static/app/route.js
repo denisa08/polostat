@@ -81,6 +81,15 @@ angular.module('M6').config(function($stateProvider, $urlRouterProvider) {
        				controller : 'NavController'
        			}
        		}
-       	});
+       	}).state('polobtx', {
+        	        parent : 'nav',
+               		url : '/polobtx',
+               		views : {
+               			'content@' : {
+               				templateUrl : 'app/views/polobtx.html',
+               				controller : 'PoloBTXPairs'
+               			}
+               		}
+               	});
 
 });

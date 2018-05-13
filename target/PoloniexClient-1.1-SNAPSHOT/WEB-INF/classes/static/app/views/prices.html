@@ -4,14 +4,14 @@
 </select> records at a time.
     <div class="topright">
         <md-button class="md-raised md-primary"
-                   ng-click="sortType =  ['oneChanged','twoChanged','threeChanged','fourChanged','fiveChanged','tenChanged','thirtyChanged','hourChanged'] ; sortReverse=!sortReverse">
+                   ng-click="sortType =  ['thirtyChanged'] ; sortReverse=!sortReverse">
             sort by best price
         </md-button>
 
     </div>
 </div>
 
-<table class="table   table-bordered table-striped">
+<table class="table   table-bordered table-striped table-sm table-hover" style="font-size:12px;">
 
     <thead>
     <tr>
@@ -22,6 +22,16 @@
 
                 <span ng-show="sortType == 'star' && !sortReverse" class="fa fa-caret-down"></span>
                 <span ng-show="sortType == 'star' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+
+
+
+        <td title="Whats going on?">
+            <a href="#" ng-click="sortType = 'rocketP'; sortReverse=!sortReverse">
+                State
+                <span ng-show="sortType == 'rocketP' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'rocketP' && sortReverse" class="fa fa-caret-up"></span>
             </a>
         </td>
 
@@ -126,10 +136,31 @@
         </td>
 
         <td>
-            <a href="#" ng-click="sortType = 'allTimeChanged'; sortReverse=!sortReverse">
-                all
-                <span ng-show="sortType == 'allTimeChanged' && !sortReverse" class="fa fa-caret-down"></span>
-                <span ng-show="sortType == 'allTimeChanged' && sortReverse" class="fa fa-caret-up"></span>
+            <a href="#" ng-click="sortType = 'changed24'; sortReverse=!sortReverse">
+                24 hour
+                <span ng-show="sortType == 'changed24' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'changed24' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+        <td>
+            <a href="#" ng-click="sortType = 'changed3day'; sortReverse=!sortReverse">
+                3 days
+                <span ng-show="sortType == 'changed3day' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'changed3day' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+        <td>
+            <a href="#" ng-click="sortType = 'changed5day'; sortReverse=!sortReverse">
+                5 days
+                <span ng-show="sortType == 'changed5day' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'changed5day' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+        </td>
+        <td>
+            <a href="#" ng-click="sortType = 'changed7day'; sortReverse=!sortReverse">
+                7 days
+                <span ng-show="sortType == 'changed7day' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'changed7day' && sortReverse" class="fa fa-caret-up"></span>
             </a>
         </td>
     </tr>
@@ -151,7 +182,14 @@
 
         </td>
 
-        <td><a target="_blank" href="https://bittrex.com/Market/Index?MarketName={{ pair.name }}">{{ pair.name }}</a>
+        <td><img   ng-src="{{isRocketP(pair)}}" width="25" height="25"></td>
+
+
+        <td><a ng-show="userAdmin" target="_blank" href="https://bittrex.com/Market/Index?MarketName={{ pair.name }}"><span class="fa fa-lock-o"></span>  {{ pair.name }}</a><i style="margin-left:17px;"  ng-show="!userAdmin" class="fa fa-lock"></i>
+
+<!--
+
+-->
         </td>
         <td>{{ pair.last }}</td>
         <!--    <td d3Visualization   ng-class="{red: (pair.oneChanged <0), green: (pair.oneChanged >=0)}">{{ pair.oneChanged }}</td>-->
@@ -192,14 +230,30 @@
         </td>
         <td animate-on-change='pair.twentyHourChanged'
             ng-class="{red: (pair.twentyHourChanged <0), green: (pair.twentyHourChanged >=0)}"><i
-                ng-class="{down: (pair.twentyHourChanged <0), up: (pair.twentyHourChanged >=0)}"></i>{{
-            pair.twentyHourChanged }}%
-        </td>
-        <td animate-on-change='pair.allTimeChanged'
-            ng-class="{red: (pair.allTimeChanged <0), green: (pair.allTimeChanged >=0)}"><i
-                ng-class="{down: (pair.allTimeChanged <0), up: (pair.allTimeChanged >=0)}"></i>{{ pair.allTimeChanged
+                ng-class="{down: (pair.twentyHourChanged <0), up: (pair.twentyHourChanged >=0)}"></i>{{ pair.twentyHourChanged
             }}%
         </td>
+        <td animate-on-change='pair.changed24'
+            ng-class="{red: (pair.changed24 <0), green: (pair.changed24 >=0)}"><i
+                ng-class="{down: (pair.changed24 <0), up: (pair.changed24 >=0)}"></i>{{
+            pair.changed24 }}%
+        </td>
+        <td animate-on-change='pair.changed3day'
+            ng-class="{red: (pair.changed3day <0), green: (pair.changed3day >=0)}"><i
+                ng-class="{down: (pair.changed3day <0), up: (pair.changed3day >=0)}"></i>{{ pair.changed3day
+            }}%
+        </td>
+        <td animate-on-change='pair.changed5day'
+            ng-class="{red: (pair.changed5day <0), green: (pair.changed5day >=0)}"><i
+                ng-class="{down: (pair.changed5day <0), up: (pair.changed5day >=0)}"></i>{{ pair.changed5day
+            }}%
+        </td>
+        <td animate-on-change='pair.changed7day'
+            ng-class="{red: (pair.changed7day <0), green: (pair.changed7day >=0)}"><i
+                ng-class="{down: (pair.changed7day <0), up: (pair.changed7day >=0)}"></i>{{ pair.changed7day
+            }}%
+        </td>
+
     </tr>
     </tbody>
 </table>

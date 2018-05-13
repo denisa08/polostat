@@ -32,30 +32,14 @@ public class ArbitrageTests {
       for (int i=0;i<3;i++){
 
             ArrayList<ArbitragePair> arbitragePairs =  arbitrageService.getPairs();
-            arbitragePairs.forEach(arbitragePair -> {
+            if (arbitragePairs!=null&&arbitragePairs.size()>0){
+                arbitragePairs.forEach(arbitragePair -> {
+                    System.out.println(arbitragePair);
 
-                Assert.assertNotNull(arbitragePair.getName());
-                System.out.println("getName"+arbitragePair.getName());
+                });
+            }
 
-
-                Assert.assertNotNull(arbitragePair.getLastBtxPrice());
-                System.out.println("LastPriceBTX"+arbitragePair.getLastBtxPrice());
-
-                Assert.assertNotNull(arbitragePair.getLastBtxVolume());
-                System.out.println("getLastBtxVolume"+arbitragePair.getLastBtxVolume());
-
-                Assert.assertNotNull(arbitragePair.getLastPoloPrice());
-                System.out.println("getLastPoloPrice"+arbitragePair.getLastPoloPrice());
-
-
-
-                Assert.assertNotNull(arbitragePair.getPriceDiff());
-                System.out.println("getPriceDiff"+arbitragePair.getPriceDiff());
-
-
-
-            });
-            Thread.sleep(60000);
+            Thread.sleep(30000);
 
         }
 

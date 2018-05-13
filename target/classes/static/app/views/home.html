@@ -1,5 +1,5 @@
 <div class="alert alert-info">
-    last update at: <span>{{lastUpdate}}</span>
+    Update every minute. Last updated at: <span>{{lastUpdate}}</span>
 </div>
 
 <form>
@@ -14,17 +14,17 @@
 <!--<crypto-tabs></crypto-tabs>-->
 <md-content>
     <md-tabs md-dynamic-height="" md-border-bottom="">
-
-        <md-tab label="Volume changes">
-            <md-content class="md-padding">
-                <volumes></volumes>
-            </md-content>
-        </md-tab>
         <md-tab label="Price changes">
             <md-content class="md-padding">
                 <prices></prices>
 
             </md-content>
         </md-tab>
+        <md-tab label="Volume changes">
+            <md-content class="md-padding">
+                <volumes></volumes>
+            </md-content>
+        </md-tab>
+
     </md-tabs>
 </md-content>

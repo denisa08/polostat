@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.UnknownHostException;
 import java.util.*;
 
+import lombok.Data;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -14,6 +15,8 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
+
+@Data
 public class Bittrex {
 
     public static final String ORDERBOOK_BUY = "buy", ORDERBOOK_SELL = "sell", ORDERBOOK_BOTH = "both";

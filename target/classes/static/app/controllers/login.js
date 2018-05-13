@@ -3,13 +3,7 @@ angular.module('M6')
 .controller('LoginController', function($http, $scope, $state, $localStorage, $rootScope) {
 	// method for login
 	$scope.login = function() {
-
-
-
-
-
-
-     $http({
+  $http({
             url: 'authenticate',
             method: "POST",
             data: { 'username' : $scope.username,'password' : $scope.password }

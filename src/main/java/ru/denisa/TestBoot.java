@@ -25,8 +25,10 @@ public class TestBoot {
     public static void main(String[] args) {
 
         SpringApplication.run(TestBoot.class, args);
+        System.setProperty("jasypt.encryptor.password", "password");
 
-     }
+
+    }
 
 
 }

@@ -14,6 +14,21 @@ public class ArbitragePair {
 
     private double lastPoloPrice;
     private double lastBtxPrice;
+    private double lastCryptoPiaPrice;
+
+
+    private double max;
+    private double min;
+
+
+    //где купить
+    private String buyIn;
+
+    //где продать
+    private String sellIn;
+
+    private double profit;
+
 
     private double lastPoloVolume;
     private double lastBtxVolume;

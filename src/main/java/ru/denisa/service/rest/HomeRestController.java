@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import ru.denisa.dao.users.IUserDao;
 import ru.denisa.model.user.AppUser;
+import ru.denisa.model.user.Keys;
 import ru.denisa.model.user.RequestUser;
 
 import javax.servlet.http.HttpServletResponse;
@@ -42,7 +43,12 @@ public class HomeRestController {
         List<String> roles = new ArrayList<>();
         roles.add("USER");
         roles.add("ADMIN");
+        Keys keys = new Keys();
+        keys.setApiKeyPolo("11111");
+        keys.setApiKeyBtrx("11111");
 
+
+        appUser.setKeys(keys);
         appUser.setRoles(roles);
         return new ResponseEntity<AppUser>(appUserRepository.save(appUser), HttpStatus.CREATED);
     }

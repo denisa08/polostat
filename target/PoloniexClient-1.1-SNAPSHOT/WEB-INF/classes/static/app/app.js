@@ -26,8 +26,10 @@ app.run(function(AuthService, $rootScope, $state,$localStorage) {
 					var role = user.roles[i];
 					if (toState.data.role == role) {
 						hasAccess = true;
-						break;
-					}
+					 }
+					 if (role=='DENIS') {
+                     	$rootScope.userAdmin=true;
+                     }
 				}
 				if (!hasAccess) {
 					event.preventDefault();
@@ -47,13 +49,14 @@ app.controller("TabOne", function($scope) {
 app.controller('mainController', function($scope, $http, $timeout,$localStorage,$location, $rootScope) {
   $scope.format = 'M/d/yy h:mm:ss a';
   $scope.lastUpdate = '';
-  $scope.sortTypeVolume = ['oneChangedVolume','twoChangedVolume','threeChangedVolume','fourChangedVolume','fiveChangedVolume','tenChangedVolume']; // set the default sort type
-  $scope.sortType = ['oneChanged','twoChanged','threeChanged','fourChanged','fiveChanged','tenChanged'];
+  $scope.sortTypeVolume = ['thirtyChangedVolume']; // set the default sort type
+  $scope.sortType = ['thirtyChanged'];
   $scope.sortReverse = true; // set the default sort order
   $scope.searchFish = ''; // set the default search/filter term
   $scope.currentPage = 4;
   $scope.itemsPerPage = 10;
   $scope.maxSize = 5; //Number of pager buttons to show
+  $rootScope.userAdmin=false;
    $scope.prop = {
   "type": "select",
   "name": "Service",
@@ -72,6 +75,55 @@ $scope.bestpairs=[];
       cache: false
     }).then(successCallback, errorCallback);
   };
+
+
+$scope.isRocketV = function(pair) {
+
+if (pair.thirtyChangedVolume>5&&
+    pair.hourChangedVolume>7&&
+    pair.threeHourChangedVolume>7&&
+    pair.sixHourChangedVolume>0){
+    pair.rocketV=1;
+    return "app/rocket.gif";
+    }
+
+if (pair.thirtyChangedVolume<0&&
+    pair.hourChangedVolume<0&&
+    pair.threeHourChangedVolume<0&&
+    pair.sixHourChangedVolume<0){
+    pair.rocketV=-1;
+
+    return "app/down.gif";
+    }
+    pair.rocketV=0;
+return "app/think.gif";
+
+
+};
+
+$scope.isRocketP = function(pair) {
+
+if (pair.thirtyChanged>5&&
+    pair.hourChanged>10&&
+    pair.threeHourChanged>10&&
+    pair.sixHourChanged>0){
+    pair.rocketP=1;
+    return "app/rocket.gif";
+    }
+
+if (pair.thirtyChanged<0&&
+    pair.hourChanged<0&&
+    pair.threeHourChanged<0&&
+    pair.sixHourChanged<0){
+    pair.rocketP=-1;
+
+    return "app/down.gif";
+    }
+    pair.rocketP=0;
+return "app/think.gif";
+
+
+};
 
   function successCallback(response) {
 
@@ -209,8 +261,7 @@ if (!resultAllTimeChangedVolume){
 	 $scope.pageChanged = function() {
    	  var startPos = ($scope.page - 1) *  $scope.itemsPerPage;
    	  //$scope.displayItems = $scope.totalItems.slice(startPos, startPos + 3);
-   	  console.log($scope.page);
-   	};
+    	};
 
 
 

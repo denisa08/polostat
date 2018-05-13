@@ -8,6 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeFactory;
+import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.cryptopia.CryptopiaExchange;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
@@ -29,13 +30,24 @@ public class CryptopiaMarketDataServiceIntegration {
     @BeforeClass
     public static void setupExchange() {
         Exchange exchange = ExchangeFactory.INSTANCE.createExchange(CryptopiaExchange.class.getName());
+        ExchangeSpecification exchangeSpecification = new ExchangeSpecification(CryptopiaExchange.class.getName());
 
+
+        // exchange.applySpecification();
+
+        try {
+            exchange.getAccountService().getAccountInfo().getWallets();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         marketDataService = exchange.getMarketDataService();
     }
 
     @Test
     public void testGetOrderBook() throws IOException {
         OrderBook orderBook = marketDataService.getOrderBook(CurrencyPair.ETH_BTC);
+
+
 
         log.info(orderBook.toString());
 

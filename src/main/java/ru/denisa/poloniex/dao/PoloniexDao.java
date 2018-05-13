@@ -6,9 +6,11 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
+import ru.denisa.dao.users.UserDao;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,28 +26,30 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class PoloniexDao implements InitializingBean {
 
-    LoadingCache<String, PoloniexTicker> fiveMinuteCache;
+    LoadingCache<String, PoloniexTicker> minuteCache;
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
     //Хранит массив имен поддерживаемых пар между битрексом и полониксом
     private String[] poloniexPairs;
-    @Value("${polopairs}")
+    @Value("${pairs}")
     private String poloPairProp;
 
-    @Value("${polo.apiKey}")
+    @Autowired
+    UserDao userDao;
+
+
     private String apiKey;
 
-    @Value("${polo.apiSecret}")
-    private String apiSecret;
+     private String apiSecret;
 
 
-    //обновляется каждые 4,5 минуты
+    //обновляется каждую минуту
     public PoloniexTicker getLastTicker(String pairName) {
-        if (fiveMinuteCache == null) {
+        if (minuteCache == null) {
 
-            fiveMinuteCache = Caffeine.newBuilder()
+            minuteCache = Caffeine.newBuilder()
                     .maximumSize(100)
-                    .refreshAfterWrite(180000, TimeUnit.MILLISECONDS)
+                    .refreshAfterWrite(60000, TimeUnit.MILLISECONDS)
                     .build(ticker -> { // Using a jOOQ repository
                         log.info("update PoloniexDao cache,attempt to add new ticker = "+ticker, dateFormat.format(new Date()));
                         PoloniexExchangeService service = new PoloniexExchangeService(apiKey, apiSecret);
@@ -54,7 +58,7 @@ public class PoloniexDao implements InitializingBean {
                          return tickerPolo;
                     });
         }
-        return fiveMinuteCache.get(pairName);
+        return minuteCache.get(pairName);
     }
 
 
@@ -71,7 +75,10 @@ public class PoloniexDao implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        poloniexPairs = poloPairProp.toString().split("#");
+        poloniexPairs = poloPairProp.toString().replace("-","_").split("#");
+        apiKey = userDao.findByName("denis").getKeys().getApiKeyPolo();
+        apiSecret = userDao.findByName("denis").getKeys().getApiSecretPolo();
+
 
     }
 }

@@ -2,6 +2,7 @@ package ru.denisa.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -19,8 +20,27 @@ import java.util.List;
 
 /**
  * Created by d.aleksandrov on 12.11.2017.
+ * {
+ "_id" : NumberLong(100787),
+ "_class" : "ru.denisa.model.user.AppUser",
+ "name" : "denis",
+ "username" : "denis",
+ "password" : "denis",
+ "roles" : [
+ "USER",
+ "ADMIN"
+ ],
+ "api" : {
+ "apiKeyPolo" : "11111",
+ "apiKeyBtrx" : "11111"
+ }
+ }
+ *
+ *
+ *
  */
 @Document(collection = "AppUser")
+@Data
 public class AppUser implements UserDetails {
     @Id
     @Indexed
@@ -33,6 +53,9 @@ public class AppUser implements UserDetails {
 
     @Field("roles")
      private List<String> roles = new ArrayList<>();
+
+    @Field("api")
+    private Keys keys;
 
     public Long getId() {
         return id;

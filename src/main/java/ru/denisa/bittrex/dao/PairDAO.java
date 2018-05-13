@@ -3,7 +3,9 @@ package ru.denisa.bittrex.dao;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Repository;
 import ru.denisa.bittrex.dao.db.DBSelect;
@@ -12,6 +14,8 @@ import ru.denisa.bittrex.model.BittrexPair;
 import ru.denisa.bittrex.model.Pair;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -21,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 @Repository
-public class PairDAO {
+public class PairDAO implements InitializingBean {
     @Autowired
     private MongoOperations mongoOperations;
 
@@ -46,6 +50,11 @@ public class PairDAO {
     private LoadingCache<String, Pair> twelveHourCache;
     private LoadingCache<String, Pair> twentyFourCache;
     private LoadingCache<String, Pair> weekCache;
+
+
+    @Value("${pairsBTX}")
+    private String btxPairProp;
+    private String[] btxStrPairs;
 
 
     LoadingCache<String, List<BittrexPair>> pairsCache = null;
@@ -87,6 +96,22 @@ public class PairDAO {
         return pairsCache.get("");
     }
 
+
+    public ArrayList<Pair> getLastArbitragePairs() {
+
+        ArrayList<Pair> pairs = new ArrayList();
+
+        Arrays.stream(btxStrPairs).forEach(s -> {
+
+            Pair pair = getLastPair(s);
+            if (pair != null) {
+                pairs.add(pair);
+            }
+
+
+        });
+        return pairs;
+    }
 
     public Pair getLastPair(String pairName) {
         if (oneMinuteCache == null) {
@@ -294,6 +319,7 @@ public class PairDAO {
         return weekCache.get(pairName);
 
     }
+
     public Pair getFirstPair5Day(String pairName) {
         if (weekCache == null) {
 
@@ -328,10 +354,11 @@ public class PairDAO {
     }
 
 
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        btxStrPairs = btxPairProp.toString().split("#");
 
-
-
-
+    }
 
 
 }
